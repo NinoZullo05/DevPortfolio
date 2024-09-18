@@ -15,7 +15,7 @@ module.exports = {
       colors: {
         "light-green": "#32CD32",
         "dark-green": "#006400",
-        "dark-bg": "#1a1a1a",
+        "dark-bg": "#1d2a35",
         "light-bg": "#ffffff",
         "dark-text": "#e2e2e2", // light text for dark mode
         "light-text": "#333333", // dark text for light mode

@@ -3,7 +3,7 @@ import DevImage from '../assets/images/dev.png';
 
 const Home = () => {
   return (
-    <div className="bg-light-bg dark:bg-dark-bg min-h-screen flex items-center justify-center">
+    <div id="home" className="bg-light-bg dark:bg-dark-bg min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-4 md:px-12 lg:px-24 md:flex md:items-center md:ml-16 mt-8">
         <div className="md:w-1/2 text-center md:text-left md:pr-8">
           <h1 className="text-3xl md:text-6xl font-bold text-light-text dark:text-dark-text mb-4 ">

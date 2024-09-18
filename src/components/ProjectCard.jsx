@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaAngular, FaReact, FaJava } from "react-icons/fa";
 import { SiTailwindcss, SiMysql, SiFlutter } from "react-icons/si";
 
-const ProjectCard = ({ title, description, image, technologies }) => {
+const ProjectCard = ({ title, description, image, technologies, isDarkMode }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -10,11 +10,9 @@ const ProjectCard = ({ title, description, image, technologies }) => {
   };
 
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4">
+    <div className="relative w-full h-full max-w-xs md:max-w-sm lg:max-w-md p-4">
       <div
-        className={`relative w-auto max-w-xs h-80 rounded-lg shadow-lg overflow-hidden cursor-pointer transition-transform duration-500 ${
-          isFlipped ? "transform rotate-y-180" : ""
-        }`}
+        className="relative w-full h-96 max-w-md rounded-lg shadow-lg overflow-hidden cursor-pointer transition-transform duration-500"
         onMouseEnter={handleFlip}
         onMouseLeave={handleFlip}
         role="button"
@@ -23,29 +21,27 @@ const ProjectCard = ({ title, description, image, technologies }) => {
       >
         {/* Front Side */}
         <div
-          className={`absolute w-full h-full backface-hidden transition-opacity duration-500 ${
-            isFlipped ? "opacity-0" : "opacity-100"
-          }`}
+          className={`w-full h-full transition-opacity duration-500 ${isFlipped ? "opacity-0" : "opacity-100"}`}
         >
           <img
             src={image}
             alt={`${title} Thumbnail`}
-            className="w-full h-full object-cover"
+            className="w-full h-3/5 object-cover"
           />
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
-            <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-            <p className="text-sm text-gray-300">{description}</p>
+          <div className={`p-4 h-2/5 ${isDarkMode ? "bg-dark-gray" : "bg-light-gray"}`}>
+            <h3 className={`text-2xl font-bold mb-2 ${isDarkMode ? "text-dark-text" : "text-light-text"}`}>
+              {title}
+            </h3>
+            <p className={`text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>{description}</p>
           </div>
         </div>
 
         {/* Back Side */}
         <div
-          className={`absolute w-full h-full backface-hidden bg-white p-6 transform rotate-y-180 transition-opacity duration-500 ${
-            isFlipped ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute w-full h-full top-0 transition-opacity duration-500 ${isFlipped ? "opacity-100" : "opacity-0"} ${isDarkMode ? "bg-dark-gray text-dark-text" : "bg-light-gray text-light-text"} p-6`}
         >
           <h3 className="text-2xl font-bold mb-4">{title}</h3>
-          <p className="text-gray-600 mb-4">Detailed information about the project.</p>
+          <p className="mb-4">Detailed information about the project.</p>
           <div className="flex flex-wrap gap-2 mb-4">
             {technologies.map((tech, index) => (
               <span
@@ -65,7 +61,7 @@ const ProjectCard = ({ title, description, image, technologies }) => {
               View Project
             </a>
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   );

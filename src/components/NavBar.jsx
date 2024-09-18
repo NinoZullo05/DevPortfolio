@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import { useTheme } from "../hooks/ThemeContext";
+import { Link } from "react-scroll"; // Importa react-scroll
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,30 +44,38 @@ const Navbar = () => {
 
           {/* Links per large screen (allineati a destra) */}
           <div className="hidden md:flex items-center space-x-4 ml-auto">
-            <a
-              href="#"
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+            <Link
+              to="home"
+              smooth={true} // Attiva lo scroll fluido
+              duration={500} // Durata dello scroll
+              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
             >
               Home
-            </a>
-            <a
-              href="#"
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+            </Link>
+            <Link
+              to="about"
+              smooth={true}
+              duration={500}
+              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
             >
               About
-            </a>
-            <a
-              href="#"
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+            </Link>
+            <Link
+              to="projects"
+              smooth={true}
+              duration={500}
+              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
             >
               Projects
-            </a>
-            <a
-              href="#"
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+            </Link>
+            <Link
+              to="contact"
+              smooth={true}
+              duration={500}
+              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
             >
               Contact
-            </a>
+            </Link>
 
             {/* Pulsante di toggle dark mode per schermi grandi */}
             <button
@@ -117,30 +126,42 @@ const Navbar = () => {
 
             {/* Link del menu mobile */}
             <nav className="flex flex-col space-y-4">
-              <a
-                href="#"
-                className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+              <Link
+                to="home"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+                onClick={() => setIsOpen(false)} // Chiude il menu mobile dopo il click
               >
                 Home
-              </a>
-              <a
-                href="#"
-                className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+              </Link>
+              <Link
+                to="about"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+                onClick={() => setIsOpen(false)}
               >
                 About
-              </a>
-              <a
-                href="#"
-                className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+              </Link>
+              <Link
+                to="projects"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+                onClick={() => setIsOpen(false)}
               >
                 Projects
-              </a>
-              <a
-                href="#"
-                className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+              </Link>
+              <Link
+                to="contact"
+                smooth={true}
+                duration={500}
+                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+                onClick={() => setIsOpen(false)}
               >
                 Contact
-              </a>
+              </Link>
             </nav>
           </div>
 
