@@ -4,17 +4,18 @@ import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import AboutMe from "../components/AboutMe";
+import { ThemeProvider } from "../hooks/ThemeContext";
 const HomePage = () => {
   return (
     <>
-     <div className="dark:bg-dark-bg bg-light-bg">
-     <Navbar />
-      <Home />
-      <AboutMe />
-      <Projects />
-      <Contact />
-      <Footer />
-     </div>
+      <ThemeProvider>
+        <Navbar />
+        <Home />
+        <AboutMe />
+        <Projects />
+        <Contact />
+        <Footer />
+      </ThemeProvider>
     </>
   );
 };

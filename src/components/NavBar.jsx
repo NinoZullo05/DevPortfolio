@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
+import { useTheme } from "../hooks/ThemeContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,10 +37,12 @@ const Navbar = () => {
               href="#"
               className="text-xl font-bold text-light-text dark:text-dark-text"
             >
-              Nzullo.dev
+              Nzullo
             </a>
           </div>
-          <div className="hidden md:flex items-center space-x-4">
+
+          {/* Links per large screen (allineati a destra) */}
+          <div className="hidden md:flex items-center space-x-4 ml-auto">
             <a
               href="#"
               className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
@@ -62,28 +67,25 @@ const Navbar = () => {
             >
               Contact
             </a>
+
+            {/* Pulsante di toggle dark mode per schermi grandi */}
+            <button
+              onClick={toggleTheme}
+              className="ml-4 text-light-text dark:text-dark-text focus:outline-none"
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
+            </button>
           </div>
+
+          {/* Pulsante menu mobile */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green focus:outline-none focus:text-light-green dark:focus:text-dark-green"
+              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green focus:outline-none"
               aria-label="toggle menu"
             >
-              {!isOpen ? (
-                <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
-                  <path
-                    fillRule="evenodd"
-                    d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2z"
-                  ></path>
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
-                  <path
-                    fillRule="evenodd"
-                    d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-                  ></path>
-                </svg>
-              )}
+              {!isOpen ? <FaBars size={24} /> : <FaTimes size={24} />}
             </button>
           </div>
         </div>
@@ -96,26 +98,24 @@ const Navbar = () => {
         }`}
       >
         <div className="flex flex-col h-full justify-between">
+          {/* Parte superiore menu mobile */}
           <div className="px-4 py-6">
             <div className="flex items-center justify-between mb-8">
               <a
                 href="#"
                 className="text-xl font-bold text-light-text dark:text-dark-text"
               >
-                Nzullo.dev
+                Nzullo
               </a>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-light-text dark:text-dark-text focus:outline-none"
               >
-                <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current">
-                  <path
-                    fillRule="evenodd"
-                    d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-                  ></path>
-                </svg>
+                <FaTimes size={24} />
               </button>
             </div>
+
+            {/* Link del menu mobile */}
             <nav className="flex flex-col space-y-4">
               <a
                 href="#"
@@ -143,27 +143,31 @@ const Navbar = () => {
               </a>
             </nav>
           </div>
-          <div className="px-4 py-6">
-            <div className="flex justify-start space-x-4">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-light-green dark:hover:text-dark-green"
-              >
-                <span className="sr-only">LinkedIn</span>
-                {/* Icona LinkedIn */}
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-light-green dark:hover:text-dark-green"
-              >
-                <span className="sr-only">GitHub</span>
-                {/* Icona GitHub */}
-              </a>
-            </div>
+
+          {/* Toggle modalità scura (in basso nella tendina mobile) */}
+          <div className="px-4 py-6 border-t border-gray-200 dark:border-gray-700">
+            <button
+              onClick={toggleTheme}
+              className="flex items-center space-x-2 text-light-text dark:text-dark-text focus:outline-none"
+              aria-label="Toggle theme"
+            >
+              {isDarkMode ? (
+                <>
+                  <FaSun size={24} />
+                  <span>Light Mode</span>
+                </>
+              ) : (
+                <>
+                  <FaMoon size={24} />
+                  <span>Dark Mode</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
       </div>
 
+      {/* Overlay per chiusura menu mobile */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"

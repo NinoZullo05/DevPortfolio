@@ -1,19 +1,22 @@
+import React from "react";
+import AboutImage from "../assets/images/about.jpg";
+
 const AboutMe = () => {
   return (
     <div className="bg-light-bg dark:bg-dark-bg py-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 max-w-5xl">
         <h2 className="text-3xl font-bold text-center text-light-text dark:text-dark-text mb-8">
           About Me
         </h2>
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-8 md:mb-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div className="flex justify-center">
             <img
-              src="/path-to-your-image.jpg"
+              src={AboutImage}
               alt="Workspace"
-              className="rounded-lg shadow-lg"
+              className="rounded-lg shadow-lg max-w-full h-auto"
             />
           </div>
-          <div className="md:w-1/2 md:pl-8">
+          <div className="text-center md:text-left">
             <h3 className="text-2xl font-semibold text-light-text dark:text-dark-text mb-4">
               Front-end Developer based in Milan, Italy 📍
             </h3>
