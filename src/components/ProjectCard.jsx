@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FaAngular, FaReact, FaJava } from "react-icons/fa";
-import { SiTailwindcss, SiMysql, SiFlutter } from "react-icons/si";
+
 
 const ProjectCard = ({ title, description, image, technologies, isDarkMode }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -54,7 +53,7 @@ const ProjectCard = ({ title, description, image, technologies, isDarkMode }) =>
           </div>
           <div className="mt-auto">
             <a
-              href="#"
+              href="#test"
               className="inline-block px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-300"
               aria-label="View Project"
             >

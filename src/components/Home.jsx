@@ -15,13 +15,13 @@ const Home = () => {
           </p>
           <div className="flex justify-center md:justify-start space-x-4">
             <a
-              href="#"
+              href="#test"
               className="text-3xl text-gray-600 hover:text-light-green dark:text-gray-400 dark:hover:text-dark-green"
             >
               <i className="fab fa-linkedin"></i>
             </a>
             <a
-              href="#"
+              href="#test"
               className="text-3xl text-gray-600 hover:text-light-green dark:text-gray-400 dark:hover:text-dark-green"
             >
               <i className="fab fa-github"></i>

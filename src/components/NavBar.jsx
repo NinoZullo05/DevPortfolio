@@ -1,200 +1,124 @@
-import React, { useState, useEffect } from "react";
-import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
-import { useTheme } from "../hooks/ThemeContext";
-import { Link } from "react-scroll"; // Importa react-scroll
+import React, { useState, useEffect, useRef } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from "react-scroll";
+import DarkModeToggle from "./DarkModeToggle";
+import SocialMediaButtons from "./SocialMediaButtons";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme();
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        isOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen]);
+
+  const navLinks = [
+    { to: "home", label: "Home" },
+    { to: "about", label: "About" },
+    { to: "projects", label: "Projects" },
+    { to: "contact", label: "Contact" },
+  ];
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-light-bg dark:bg-dark-bg shadow-lg"
-          : "bg-transparent dark:bg-transparent"
+        isScrolled ? "bg-light-bg dark:bg-dark-bg shadow-lg" : "bg-transparent dark:bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-5">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <a
-              href="#"
-              className="text-xl font-bold text-light-text dark:text-dark-text"
-            >
-              Nzullo
-            </a>
+          <a href="github.com/NinoZullo05" className="text-xl font-bold text-light-text dark:text-dark-text">
+            Nzullo
+          </a>
+
+          {/* Desktop navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                smooth={true}
+                duration={500}
+                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <DarkModeToggle />
           </div>
 
-          {/* Links per large screen (allineati a destra) */}
-          <div className="hidden md:flex items-center space-x-4 ml-auto">
-            <Link
-              to="home"
-              smooth={true} // Attiva lo scroll fluido
-              duration={500} // Durata dello scroll
-              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-            >
-              Home
-            </Link>
-            <Link
-              to="about"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-            >
-              About
-            </Link>
-            <Link
-              to="projects"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-            >
-              Projects
-            </Link>
-            <Link
-              to="contact"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-            >
-              Contact
-            </Link>
-
-            {/* Pulsante di toggle dark mode per schermi grandi */}
-            <button
-              onClick={toggleTheme}
-              className="ml-4 text-light-text dark:text-dark-text focus:outline-none"
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
-            </button>
-          </div>
-
-          {/* Pulsante menu mobile */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green focus:outline-none"
-              aria-label="toggle menu"
-            >
-              {!isOpen ? <FaBars size={24} /> : <FaTimes size={24} />}
-            </button>
-          </div>
+          {/* Mobile menu button */}
+          <button
+            ref={buttonRef}
+            onClick={toggleMenu}
+            className="md:hidden text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300 z-50"
+            aria-label="Toggle mobile menu"
+          >
+            {isOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
+          </button>
         </div>
       </div>
 
-      {/* Menu mobile */}
+      {/* Mobile menu */}
       <div
-        className={`md:hidden fixed top-0 right-0 bottom-0 w-64 bg-light-bg dark:bg-dark-bg z-50 shadow-lg transform transition-transform duration-300 ease-in-out ${
+        ref={menuRef}
+        className={`fixed inset-y-0 right-0 z-40 w-64 bg-light-bg dark:bg-dark-bg shadow-lg transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        } transition-transform duration-300 ease-in-out md:hidden`}
       >
-        <div className="flex flex-col h-full justify-between">
-          {/* Parte superiore menu mobile */}
-          <div className="px-4 py-6">
-            <div className="flex items-center justify-between mb-8">
-              <a
-                href="#"
-                className="text-xl font-bold text-light-text dark:text-dark-text"
-              >
-                Nzullo
-              </a>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-light-text dark:text-dark-text focus:outline-none"
-              >
-                <FaTimes size={24} />
-              </button>
+        <div className="flex flex-col h-full pt-16 px-8">
+          <ul className="space-y-6">
+            {navLinks.map((link) => (
+              <li key={link.to}>
+                <Link
+                  to={link.to}
+                  smooth={true}
+                  duration={500}
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green cursor-pointer transition duration-300"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-auto">
+            <SocialMediaButtons />
+            <div className="mt-4 flex justify-center mb-4">
+              <DarkModeToggle />
             </div>
-
-            {/* Link del menu mobile */}
-            <nav className="flex flex-col space-y-4">
-              <Link
-                to="home"
-                smooth={true}
-                duration={500}
-                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-                onClick={() => setIsOpen(false)} // Chiude il menu mobile dopo il click
-              >
-                Home
-              </Link>
-              <Link
-                to="about"
-                smooth={true}
-                duration={500}
-                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-              <Link
-                to="projects"
-                smooth={true}
-                duration={500}
-                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Projects
-              </Link>
-              <Link
-                to="contact"
-                smooth={true}
-                duration={500}
-                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
-            </nav>
-          </div>
-
-          {/* Toggle modalità scura (in basso nella tendina mobile) */}
-          <div className="px-4 py-6 border-t border-gray-200 dark:border-gray-700">
-            <button
-              onClick={toggleTheme}
-              className="flex items-center space-x-2 text-light-text dark:text-dark-text focus:outline-none"
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? (
-                <>
-                  <FaSun size={24} />
-                  <span>Light Mode</span>
-                </>
-              ) : (
-                <>
-                  <FaMoon size={24} />
-                  <span>Dark Mode</span>
-                </>
-              )}
-            </button>
           </div>
         </div>
       </div>
-
-      {/* Overlay per chiusura menu mobile */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={() => setIsOpen(false)}
-        ></div>
-      )}
     </nav>
   );
 };
