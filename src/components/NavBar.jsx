@@ -51,12 +51,17 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-light-bg dark:bg-dark-bg shadow-lg" : "bg-transparent dark:bg-transparent"
+        isScrolled
+          ? "bg-light-bg dark:bg-dark-bg shadow-lg"
+          : "bg-transparent dark:bg-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto px-5">
         <div className="flex justify-between items-center h-16">
-          <a href="github.com/NinoZullo05" className="text-xl font-bold text-light-text dark:text-dark-text">
+          <a
+            href="github.com/NinoZullo05"
+            className="text-xl font-bold text-light-text dark:text-dark-text"
+          >
             Nzullo
           </a>
 
