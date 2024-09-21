@@ -21,6 +21,8 @@ module.exports = {
         "light-text": "#333333", // dark text for light mode
         "light-gray": "#f4f4f4", // light gray background
         "dark-gray": "#2d2d2d", // dark gray background
+        "light-purple": "#a855f7", // violet chiaro per modalità chiara
+        "dark-purple": "#7c3aed", // violet scuro per modalità scura
       },
     },
   },

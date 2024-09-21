@@ -18,26 +18,25 @@ const Home = () => {
           </p>
           <div className="flex justify-center md:justify-start space-x-4">
             <a
-              href="#test"
-              className="text-3xl text-gray-600 hover:text-light-green dark:text-gray-400 dark:hover:text-dark-green"
+              href="https://www.linkedin.com/in/ninozullo05/"
+              className="text-3xl text-gray-600 hover:text-light-purple dark:text-gray-400 dark:hover:text-dark-purple"
             >
               <i className="fab fa-linkedin"></i>
             </a>
             <a
-              href="#test"
-              className="text-3xl text-gray-600 hover:text-light-green dark:text-gray-400 dark:hover:text-dark-green"
+              href="https://github.com/NinoZullo05"
+              className="text-3xl text-gray-600 hover:text-light-purple dark:text-gray-400 dark:hover:text-dark-purple"
             >
               <i className="fab fa-github"></i>
             </a>
           </div>
         </div>
 
-        {/* Colonna Destra con l'Immagine */}
         <div className="md:w-1/2 flex justify-center mt-8 md:mt-0">
           <img
             src={DevImage}
             alt="Immagine Destra"
-            className="w-full h-auto max-w-sm  transition-transform "
+            className="w-full h-auto max-w-sm"
           />
         </div>
       </div>

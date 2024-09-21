@@ -1,3 +1,5 @@
+import React from "react";
+
 const Contact = () => {
   return (
     <div id="contact" className="bg-light-bg dark:bg-dark-bg py-16">

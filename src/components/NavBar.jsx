@@ -73,7 +73,7 @@ const Navbar = () => {
                 to={link.to}
                 smooth={true}
                 duration={500}
-                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple transition duration-300"
               >
                 {link.label}
               </Link>
@@ -85,7 +85,7 @@ const Navbar = () => {
           <button
             ref={buttonRef}
             onClick={toggleMenu}
-            className="md:hidden text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300 z-50"
+            className="md:hidden text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple transition duration-300 z-50"
             aria-label="Toggle mobile menu"
           >
             {isOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
@@ -109,7 +109,7 @@ const Navbar = () => {
                   smooth={true}
                   duration={500}
                   onClick={() => setIsOpen(false)}
-                  className="text-lg text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green cursor-pointer transition duration-300"
+                  className="text-lg text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple cursor-pointer transition duration-300"
                 >
                   {link.label}
                 </Link>
