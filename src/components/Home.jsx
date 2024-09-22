@@ -10,7 +10,7 @@ const Home = () => {
       <div className="container mx-auto px-4 md:px-12 lg:px-24 md:flex md:items-center md:ml-16 mt-8">
         <div className="md:w-1/2 text-center md:text-left md:pr-8">
           <h1 className="text-3xl md:text-6xl font-bold text-light-text dark:text-dark-text mb-4 ">
-            Front-End React Developer
+            Front-End React.js Developer
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">
             Hi, I'm Nino! A passionate Front-end React Developer based in Milan,

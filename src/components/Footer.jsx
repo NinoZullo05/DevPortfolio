@@ -26,7 +26,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
               aria-label="GitHub Profile"
-            >ssssssssssssss
+            >
               <i className="fab fa-github text-2xl"></i>
             </a>
           </div>

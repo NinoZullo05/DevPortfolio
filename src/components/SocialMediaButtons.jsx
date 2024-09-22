@@ -15,7 +15,7 @@ const SocialMediaButtons = () => {
       label: "LinkedIn",
     },
   ];
-
+x
   return (
     <div className="flex justify-center space-x-4">
       {socialLinks.map(({ icon: Icon, href, label }) => (
