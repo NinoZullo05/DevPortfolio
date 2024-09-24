@@ -1,33 +1,34 @@
 import React from "react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark-gray dark:bg-dark-bg text-light-text dark:text-dark-text py-8">
+    <footer className=" dark:bg-gray-600 text-light-text bg-gray-200 dark:text-dark-text py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="mb-4 md:mb-0">
-            Copyright © {currentYear} Nino Zullo. All rights reserved.
+            &copy; {currentYear} Nino Zullo. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a
-              href="https://www.linkedin.com/in/your-linkedin-profile"
+              href="https://www.linkedin.com/in/ninozullo"
               target="_blank"
               rel="noopener noreferrer"
               className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
               aria-label="LinkedIn Profile"
             >
-              <i className="fab fa-linkedin text-2xl"></i>
+              <FaLinkedin size={24} />
             </a>
             <a
-              href="https://github.com/your-github-profile"
+              href="https://github.com/ninozullo"
               target="_blank"
               rel="noopener noreferrer"
               className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
               aria-label="GitHub Profile"
             >
-              <i className="fab fa-github text-2xl"></i>
+              <FaGithub size={24} />
             </a>
           </div>
         </div>
