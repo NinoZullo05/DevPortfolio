@@ -13,19 +13,19 @@ const Footer = () => {
           </p>
           <div className="flex space-x-6">
             <a
-              href="https://www.linkedin.com/in/ninozullo"
+              href="https://www.linkedin.com/in/ninozullo/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+              className="text-light-text dark:text-dark-text hover:text-purple-600 dark:hover:text-purple-900 transition duration-300"
               aria-label="LinkedIn Profile"
             >
               <FaLinkedin size={24} />
             </a>
             <a
-              href="https://github.com/ninozullo"
+              href="https://github.com/NinoZullo05"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-light-text dark:text-dark-text hover:text-light-green dark:hover:text-dark-green transition duration-300"
+              className="text-light-text dark:text-dark-text hover:text-purple-600 dark:hover:text-purple-900 transition duration-300"
               aria-label="GitHub Profile"
             >
               <FaGithub size={24} />
