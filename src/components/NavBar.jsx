@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll"; // Renamed to avoid conflict
+import { Link } from "react-router-dom"; // React Router's Link
 import DarkModeToggle from "./DarkModeToggle";
 import SocialMediaButtons from "./SocialMediaButtons";
 
@@ -38,10 +39,11 @@ const Navbar = () => {
   }, [isOpen]);
 
   const navLinks = [
-    { to: "home", label: "Home" },
-    { to: "about", label: "About" },
-    { to: "projects", label: "Projects" },
-    { to: "contact", label: "Contact" },
+    { to: "home", label: "Home", isExternal: false },
+    { to: "about", label: "About", isExternal: false },
+    { to: "projects", label: "Projects", isExternal: false },
+    { to: "contact", label: "Contact", isExternal: false },
+    { to: "/utility", label: "Utility", isExternal: true }, // This will navigate to /utility
   ];
 
   const toggleMenu = () => {
@@ -67,17 +69,27 @@ const Navbar = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                smooth={true}
-                duration={500}
-                className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple transition duration-300"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.isExternal ? (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple transition duration-300"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <ScrollLink
+                  key={link.to}
+                  to={link.to}
+                  smooth={true}
+                  duration={500}
+                  className="cursor-pointer text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple transition duration-300"
+                >
+                  {link.label}
+                </ScrollLink>
+              )
+            )}
             <DarkModeToggle />
           </div>
 
@@ -102,19 +114,31 @@ const Navbar = () => {
       >
         <div className="flex flex-col h-full pt-16 px-8">
           <ul className="space-y-6">
-            {navLinks.map((link) => (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  smooth={true}
-                  duration={500}
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple cursor-pointer transition duration-300"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) =>
+              link.isExternal ? (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    onClick={() => setIsOpen(false)}
+                    className="text-lg text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple cursor-pointer transition duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ) : (
+                <li key={link.to}>
+                  <ScrollLink
+                    to={link.to}
+                    smooth={true}
+                    duration={500}
+                    onClick={() => setIsOpen(false)}
+                    className="text-lg text-light-text dark:text-dark-text hover:text-light-purple dark:hover:text-dark-purple cursor-pointer transition duration-300"
+                  >
+                    {link.label}
+                  </ScrollLink>
+                </li>
+              )
+            )}
           </ul>
           <div className="mt-auto">
             <SocialMediaButtons />
