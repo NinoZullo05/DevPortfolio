@@ -75,5 +75,5 @@ To run the project locally, follow these steps:
 ---
 
 ## License
-ò
+
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
