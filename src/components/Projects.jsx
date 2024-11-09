@@ -1,16 +1,17 @@
+'use client'
+
 import React, { useState, useRef, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 import { FaAngular, FaReact, FaJava } from "react-icons/fa";
 import { SiTailwindcss, SiMysql, SiFlutter } from "react-icons/si";
-import { useTheme } from "../hooks/ThemeContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { SiFlask } from "react-icons/si";
 
 import ToDOHQImage from "../assets/images/ToDoHQ.png";
-import SmartlinxWebsiteImage from "../assets/images/SmartLinx_Website.pn.png";
+import SmartlinxWebsiteImage from "../assets/images/Smartlinx_Website 2.png";
 import SmartlinxAppImage from "../assets/images/SmartLinx.png";
 
-const Projects = () => {
-  const { isDarkMode } = useTheme();
+export default function Projects() {
   const scrollRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
@@ -24,29 +25,50 @@ const Projects = () => {
       technologies: [
         {
           name: "Angular",
-          icon: <FaAngular className="mr-1" />,
-          color: "#dd0031",
+          icon: <FaAngular className="w-4 h-4" />,
+          bgColor: "bg-red-100",
+          textColor: "text-red-800",
         },
         {
           name: "Tailwind",
-          icon: <SiTailwindcss className="mr-1" />,
-          color: "teal",
+          icon: <SiTailwindcss className="w-4 h-4" />,
+          bgColor: "bg-teal-100",
+          textColor: "text-teal-800",
         },
-        { name: "MySQL", icon: <SiMysql className="mr-1" />, color: "blue" },
+        {
+          name: "MySQL",
+          icon: <SiMysql className="w-4 h-4" />,
+          bgColor: "bg-blue-100",
+          textColor: "text-blue-800",
+        },
+        {
+          name: "Flask",
+          icon: <SiFlask className="w-4 h-4" />,
+          bgColor: "bg-yellow-100",
+          textColor: "text-blue-800",
+        },
       ],
+      repositoryLink: "https://github.com/NinoZullo05/ToDoHQ",
     },
     {
       title: "Smartlinx Website",
       description: "A responsive website built with ReactJS and Tailwind CSS.",
       image: SmartlinxWebsiteImage,
       technologies: [
-        { name: "React", icon: <FaReact className="mr-1" />, color: "blue" },
+        {
+          name: "React",
+          icon: <FaReact className="w-4 h-4" />,
+          bgColor: "bg-blue-100",
+          textColor: "text-blue-800",
+        },
         {
           name: "Tailwind",
-          icon: <SiTailwindcss className="mr-1" />,
-          color: "teal",
+          icon: <SiTailwindcss className="w-4 h-4" />,
+          bgColor: "bg-teal-100",
+          textColor: "text-teal-800",
         },
       ],
+      repositoryLink: "https://github.com/NinoZullo05/Smartlinx-Website",
     },
     {
       title: "Smartlinx App",
@@ -55,12 +77,24 @@ const Projects = () => {
       technologies: [
         {
           name: "Flutter",
-          icon: <SiFlutter className="mr-1" />,
-          color: "blue",
+          icon: <SiFlutter className="w-4 h-4" />,
+          bgColor: "bg-blue-100",
+          textColor: "text-blue-800",
         },
-        { name: "Java", icon: <FaJava className="mr-1" />, color: "orange" },
-        { name: "MySQL", icon: <SiMysql className="mr-1" />, color: "blue" },
+        {
+          name: "Java",
+          icon: <FaJava className="w-4 h-4" />,
+          bgColor: "bg-orange-100",
+          textColor: "text-orange-800",
+        },
+        {
+          name: "MySQL",
+          icon: <SiMysql className="w-4 h-4" />,
+          bgColor: "bg-blue-100",
+          textColor: "text-blue-800",
+        },
       ],
+      repositoryLink: "https://github.com/Smartlinx-Project/Mobile-app",
     },
   ];
 
@@ -78,7 +112,6 @@ const Projects = () => {
       const scrollAmount = container.clientWidth;
       let newScrollPosition =
         scrollPosition + (direction === "left" ? -scrollAmount : scrollAmount);
-
       newScrollPosition = Math.max(0, Math.min(newScrollPosition, maxScroll));
       container.scrollTo({ left: newScrollPosition, behavior: "smooth" });
       setScrollPosition(newScrollPosition);
@@ -91,16 +124,13 @@ const Projects = () => {
   return (
     <div
       id="projects"
-      className={`py-12 ${isDarkMode ? "bg-gray-900" : "bg-gray-100"}`}
+      className="py-12 dark:bg-gray-900 bg-gray-100"
     >
       <div className="container mx-auto px-4">
-        <h2
-          className={`text-3xl md:text-4xl font-bold text-center mb-8 ${
-            isDarkMode ? "text-white" : "text-gray-800"
-          }`}
-        >
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white">
           Projects
         </h2>
+
         <div className="relative">
           {showLeftButton && (
             <button
@@ -125,7 +155,7 @@ const Projects = () => {
                   description={project.description}
                   image={project.image}
                   technologies={project.technologies}
-                  isDarkMode={isDarkMode}
+                  repositoryLink={project.repositoryLink}
                 />
               </div>
             ))}
@@ -142,7 +172,5 @@ const Projects = () => {
         </div>
       </div>
     </div>
-  )
-};
-
-export default Projects;
+  );
+}
